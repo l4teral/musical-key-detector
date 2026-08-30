@@ -1,4 +1,5 @@
-## README: In this project you should put in an .mp3 file (or any of Librosa's songfiles' accepted file types) link on line 10. Then this program will return to you its key according to two metrics: the song's notes and the song's chords.
+## README: In this project you should put in an .mp3 file (or any of Librosa's songfiles' accepted file types) link on line 11.
+##         Then this program will return to you its key according to two metrics: the song's notes and the song's chords.
 
 import librosa
 import numpy as np
@@ -7,7 +8,7 @@ from google.colab import drive
 
 ### 1. Import audio file
 drive.mount('/content/drive/', force_remount=True)
-audio = '/content/drive/MyDrive/2026_tune_detector_project/dominic_fike_hi_grace.mp3' ## OVER HERE
+audio = '/content/drive/MyDrive/2026_tune_detector_project/dominic_fike_hi_grace.mp3' ## LINE 10 OVER HERE
 y, sr = librosa.load(audio)
 
 song_length = (len(y)/sr)/60
