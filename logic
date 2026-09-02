@@ -1,6 +1,3 @@
-## README: In this project you should put in an .mp3 file (or any of Librosa's songfiles' accepted file types) link on line 11.
-##         Then this program will return to you its key according to two metrics: the song's notes and the song's chords.
-
 import librosa
 import numpy as np
 import matplotlib.pyplot as plt
