@@ -5,7 +5,7 @@ from google.colab import drive
 
 ### 1. Import audio file
 drive.mount('/content/drive/', force_remount=True)
-audio = '/content/drive/MyDrive/2026_tune_detector_project/dominic_fike_hi_grace.mp3' ## LINE 10 OVER HERE
+audio = '/content/drive/MyDrive/2026_tune_detector_project/coldplay_yellow.mp3'
 y, sr = librosa.load(audio)
 
 song_length = (len(y)/sr)/60
@@ -24,7 +24,7 @@ chroma = librosa.feature.chroma_stft(y=y, sr=sr)
 ### 3. Compare frequencies to notes. List all 12 notes
 
 chroma_mean = chroma.mean(axis=1)
-print(chroma_mean); print()
+#print(chroma_mean); print()
 
 # CHROMA BIN    0    1     2    3     4    5    6     7    8     9    10    11
 notes_sharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
@@ -42,7 +42,7 @@ camelot     = [8, 3, 10, 5, 12, 7, 2, 9, 4, 11, 6, 1]
 
 key_scores = []
 
-print()
+#print()
 
 for index, note in enumerate(chroma_mean):
 
@@ -96,7 +96,7 @@ for index, note in enumerate(chroma_mean):
 
 for index, note in enumerate(chroma_mean):
   low = index
-  print(str(notes_sharp[low]) + " Major")
+  #print(str(notes_sharp[low]) + " Major")
 
 
   middle = index + 4
@@ -114,18 +114,17 @@ for index, note in enumerate(chroma_mean):
 
 
   score = float((chroma_mean[low]+chroma_mean[middle]+chroma_mean[high])/3)
-  print(str(notes_sharp[low]) + ", " + notes_sharp[middle] + ", "  + notes_sharp[high])
-  print(score); print()
+  #print(str(notes_sharp[low]) + ", " + notes_sharp[middle] + ", "  + notes_sharp[high])
+  #print(score); print()
   major_scores.append(score);
 
   # MINOR CHORDS
 
-print(); print()
+#print(); print()
 
 for index, note in enumerate(chroma_mean):
   low = index
-  print(str(notes_sharp[low]) + " Minor")
-
+  #print(str(notes_sharp[low]) + " Minor")
 
   middle = index + 3
   if low > 8:
@@ -142,17 +141,17 @@ for index, note in enumerate(chroma_mean):
 
 
   score = float((chroma_mean[low]+chroma_mean[middle]+chroma_mean[high])/3)
-  print(str(notes_sharp[low]) + ", " + notes_sharp[middle] + ", "  + notes_sharp[high])
-  print(score); print()
+  #print(str(notes_sharp[low]) + ", " + notes_sharp[middle] + ", "  + notes_sharp[high])
+  #print(score); print()
   minor_scores.append(score);
 
-print(major_scores)
-print(minor_scores)
+#print(major_scores)
+#print(minor_scores)
 
 ### 5. Determine which major/minor key fits the notes best through iteration
 
-print("Major key relevance (by notes):")
-print(key_scores)
+#print("Major key relevance (by notes):")
+#print(key_scores)
 
 max_value = max(key_scores)
 max_index = key_scores.index(max_value)
@@ -165,7 +164,7 @@ for index, score in enumerate(major_scores):
   IV_key_index  = (index -  7) % 12
   V_key_index   = (index -  5) % 12
   vi_key_index  = (index -  3) % 12
-
+  '''
   print()
   print(index)
   print("  I: " + str(major_scores[index]))
@@ -174,11 +173,12 @@ for index, score in enumerate(major_scores):
   print(" IV: " + str(major_scores[IV_key_index]))
   #print("  V: " + str(major_scores[V_key_index]))
   print(" vi: " + str(minor_scores[vi_key_index]))
+  '''
 
   total_score = (major_scores[index] + major_scores[V_key_index] + minor_scores[vi_key_index])/3
   #total_score = (major_scores[index]*5.31 + minor_scores[ii_key_index]*3.74 + minor_scores[iii_key_index]*4.15 + major_scores[IV_key_index]*4.70 + major_scores[V_key_index]*3.85 + minor_scores[vi_key_index]*4.80)/26.55
 
-  print("TOTAL SCORE: " + str(total_score))
+  #print("TOTAL SCORE: " + str(total_score))
   chord_scores.append(total_score)
 
 chord_max_value = max(chord_scores)
@@ -193,7 +193,7 @@ print()
 '''
 
 combined_scores = [(key_scores[i] + chord_scores[i])/2 for i in range(len(key_scores))]
-print(combined_scores)
+#print(combined_scores)
 
 overall_max_value = max(combined_scores)
 overall_max_index = combined_scores.index(overall_max_value)
